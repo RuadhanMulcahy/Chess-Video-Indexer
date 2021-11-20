@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Build Monitor Service Precode Image') { 
+        stage('Build Monitor Service Precode Image') {
             steps {
                 sh "docker build -t jackwhelan/cvi-monitor-precode:${BUILD_TAG} services/cvi-monitor -f services/cvi-monitor/precode.Dockerfile"
             }
@@ -11,7 +11,7 @@ pipeline {
                 sh "docker run --name ${BUILD_TAG}-linting jackwhelan/cvi-monitor-precode:${BUILD_TAG} pylint cvi_monitor"
             }
         }
-        stage('Run Monitor Service Unit Tests') { 
+        stage('Run Monitor Service Unit Tests') {
             steps {
                 sh "docker run --name ${BUILD_TAG}-unit-tests jackwhelan/cvi-monitor-precode:${BUILD_TAG} pytest"
             }
