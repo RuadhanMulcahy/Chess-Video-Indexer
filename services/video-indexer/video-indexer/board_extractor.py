@@ -70,8 +70,8 @@ class BoardExtractor:
 
     # Extracts board from image if one is found
     def extract(self):
-        for y, i in enumerate(self.image.black_white):
+        for y, i in enumerate(self.image.image_BW):
             x, board_size = self._horizontalBoardDetect(self._imageRowToBlackWhiteCountArray(i), 20)
             if x != 0 and board_size != 0:
-                cropped_image = self.image.cropImage(y,board_size,x,board_size)
-                return cropped_image
+                self.image.cropCurrentImage(y,board_size,x,board_size)
+                return self.image
