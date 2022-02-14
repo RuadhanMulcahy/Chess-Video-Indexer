@@ -21,4 +21,4 @@ RUN poetry install --no-interaction --no-ansi --no-dev
 COPY . /usr/src/app/
 
 # Run the CLI
-ENTRYPOINT [ "python", "-m", "cvi_monitor" ]
+ENTRYPOINT [ "python", "-m", "monitor_server" ]
