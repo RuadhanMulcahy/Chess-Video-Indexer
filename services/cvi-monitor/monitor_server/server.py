@@ -1,7 +1,6 @@
 """
 This defines the CLI options for the monitor service.
 """
-import logging
 from flask import Flask
 
 from monitor_server.etc import logging_utils
@@ -11,9 +10,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
+    """
+    Temporary Default Route
+    """
     logging_utils.initialize_logging(verbose=True)
-    logging.info('TEST!')
-    return 'Hello, World!'
+    hello_world_operator = HelloWorld()
+    return hello_world_operator.say_hello()
 
 def server_main():
+    """
+    Entrypoint for Flask Server
+    """
     app.run(host='0.0.0.0', port=5000)
