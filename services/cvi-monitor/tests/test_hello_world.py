@@ -1,4 +1,4 @@
-from cvi_monitor.operators.hello_world import HelloWorld
+from monitor_server.operators.hello_world import HelloWorld
 
 def test_hello_world():
     hello_world_operator = HelloWorld()

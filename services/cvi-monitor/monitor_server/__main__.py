@@ -1,6 +1,6 @@
 """The main module for the cvi-monitor package"""
 
-from cvi_monitor import app_cli
+from monitor_server import server
 
 if __name__ == '__main__':
-    app_cli.cli_main()
+    server.server_main()

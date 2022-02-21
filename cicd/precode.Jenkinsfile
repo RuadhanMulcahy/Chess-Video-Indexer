@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Run Monitor Service Linting') { 
             steps {
-                sh "docker run --name ${BUILD_TAG}-linting jackwhelan/cvi-monitor-precode:${BUILD_TAG} pylint cvi_monitor"
+                sh "docker run --name ${BUILD_TAG}-linting jackwhelan/cvi-monitor-precode:${BUILD_TAG} pylint monitor_server"
             }
         }
         stage('Run Monitor Service Unit Tests') {
