@@ -7,6 +7,8 @@ authors = ["Jack Whelan <jackw97@live.ie>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 Flask = "^2.0.2"
+google-api-python-client = "^2.40.0"
+APScheduler = "^3.9.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
