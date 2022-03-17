@@ -19,6 +19,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install poetry
         cd services/cvi-monitor
+        poetry config virtualenvs.in-project false
         poetry install
     - name: Analysing the code with pylint
       run: |
