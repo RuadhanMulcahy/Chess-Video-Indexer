@@ -1,5 +1,7 @@
+from operator import imod
 from selenium import webdriver
 from chessdotcom import actions
+from chessdotcom.labelGame import labelGame
 import time
 
 driver_location = "/snap/bin/chromium.chromedriver"
@@ -11,23 +13,11 @@ options.add_argument("--user-data-dir=./user_data")
 
 driver = webdriver.Chrome(executable_path=driver_location, options=options)
 # driver.set_window_size(1280,720)
-driver.get("https://www.chess.com/game/live/40420840437")
+game_id = "40420840437"
+driver.get("https://www.chess.com/game/live/" + str(game_id))
+# driver.get('https://www.chess.com/game/live/39383330409')
 
 actions.closeEndGamePopUp(driver)
 actions.goToGameStart(driver)
 
-for i in range(0, 4):
-    actions.nextMove(driver)
-
-time.sleep(1)
-actions.takeScreenShot(driver)
-
-i = 1
-while(True):
-    try:
-        actions.findLocateElement(driver, '//*[@id="board-dailyGame-40420840437"]/div[' + str(i) + ']')
-    except:
-        print(i)
-        break
-    i += 1
-
+labelGame(driver, game_id)

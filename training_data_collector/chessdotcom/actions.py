@@ -25,5 +25,5 @@ def findLocateElement(driver, xpath):
     cv2.rectangle(screenshot,  (element.location['x'] + w, element.location['y'] + h), (element.location['x'], element.location['y']), (0,255,0), 2)
     cv2.imwrite('screenshot.png', screenshot)
     
-def takeScreenShot(driver):
-    driver.save_screenshot("screenshot.png")
+def takeScreenShot(driver, fname):
+    driver.save_screenshot(fname)
