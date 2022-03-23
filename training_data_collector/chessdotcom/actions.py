@@ -2,28 +2,30 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
-import cv2
+from chessdotcom.xpaths import XPaths
 
-def closeEndGamePopUp(driver):
-    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="board-layout-chessboard"]/div[3]/div/div[1]/button'))).click()
+def _click_element(driver, path):
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, path))).click()
 
-def _clickElement(driver, path):
-    driver.find_element(By.XPATH, path).click()
+def close_end_game_pop_up(driver):
+    _click_element(driver, XPaths.end_game_pop_up)
 
-def goToGameStart(driver):
-    _clickElement(driver, '//*[@id="board-layout-sidebar"]/div/div[2]/div[1]/div[4]/div[3]/div/div[2]/button[1]')
+def go_to_game_start(driver):
+    _click_element(driver, XPaths.game_start)
 
-def nextMove(driver):
-    _clickElement(driver, '//*[@id="board-layout-sidebar"]/div/div[2]/div[1]/div[4]/div[3]/div/div[2]/button[3]')
-
-def findLocateElement(driver, xpath):
-    element = driver.find_element(By.XPATH, xpath)
-    size = element.size
-    w, h = size['width'], size['height']
-    print(element.get_attribute("class"))
-    screenshot = cv2.imread("screenshot.png")
-    cv2.rectangle(screenshot,  (element.location['x'] + w, element.location['y'] + h), (element.location['x'], element.location['y']), (0,255,0), 2)
-    cv2.imwrite('screenshot.png', screenshot)
+def next_move(driver):
+    _click_element(driver, XPaths.next_move)
     
-def takeScreenShot(driver, fname):
+def take_screenshot(driver, fname):
     driver.save_screenshot(fname)
+
+def get_move_count(driver):
+    moveCount = len(driver.find_elements(By.XPATH, XPaths.move_list))
+    endMove = len(driver.find_elements(By.XPATH, XPaths.move_list + '[' + str(moveCount) +']/div'))
+    if(endMove < 3):
+        moveCount = (moveCount * 2) - 2
+    else:
+        moveCount = (moveCount * 2) - 1      
+
+    return moveCount
+    

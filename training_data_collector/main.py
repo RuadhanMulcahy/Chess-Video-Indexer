@@ -1,8 +1,7 @@
-from operator import imod
 from selenium import webdriver
+
 from chessdotcom import actions
-from chessdotcom.labelGame import labelGame
-import time
+from chessdotcom.labelgame import label_game
 
 driver_location = "/snap/bin/chromium.chromedriver"
 binary_location = "/usr/bin/chromium-browser"
@@ -17,7 +16,7 @@ game_id = "40420840437"
 driver.get("https://www.chess.com/game/live/" + str(game_id))
 # driver.get('https://www.chess.com/game/live/39383330409')
 
-actions.closeEndGamePopUp(driver)
-actions.goToGameStart(driver)
+actions.close_end_game_pop_up(driver)
+actions.go_to_game_start(driver)
 
-labelGame(driver, game_id)
+label_game(driver, game_id)
