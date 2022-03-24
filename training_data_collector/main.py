@@ -2,6 +2,7 @@ from selenium import webdriver
 
 from chessdotcom import actions
 from chessdotcom.labelgame import label_game
+from darknetconvert import create_training_data_file_structure
 
 driver_location = "/snap/bin/chromium.chromedriver"
 binary_location = "/usr/bin/chromium-browser"
@@ -11,6 +12,7 @@ options.binary_location = binary_location
 options.add_argument("--user-data-dir=./user_data")
 
 driver = webdriver.Chrome(executable_path=driver_location, options=options)
+create_training_data_file_structure()
 # driver.set_window_size(1280,720)
 game_id = "40420840437"
 driver.get("https://www.chess.com/game/live/" + str(game_id))
