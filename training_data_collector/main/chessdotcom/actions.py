@@ -28,4 +28,16 @@ def get_move_count(driver):
         moveCount = (moveCount * 2) - 1      
 
     return moveCount
+
+def change_board_size(driver, width_height):
+    board_style = driver.find_element(By.XPATH, XPaths.chess_board).get_attribute("style")
+    print(board_style.split())
+    board_style = board_style.split()
+    width_height_formatted = f"{str(width_height)}px;"
+    board_style[1] = width_height_formatted
+    board_style[3] = width_height_formatted
+    board_style = ' '.join(board_style)
+    driver.execute_script(f"arguments[0].setAttribute('style','{board_style}')", driver.find_element(By.XPATH, XPaths.chess_board))
+
+
     
