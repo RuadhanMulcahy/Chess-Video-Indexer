@@ -3,7 +3,7 @@ Entrypoint Module for CVI Monitor Service.
 """
 from flask import Flask
 
-from api_version import api_version
+from api.api_version import api_version
 
 app = Flask(__name__)
 app.register_blueprint(api_version)
