@@ -33,7 +33,7 @@ def get_recent_videos(channel_id):
     :return: dict_of_recent_video_urls
     :rtype: dict
     """
-    recent_videos = dict()
+    recent_videos = {}
     youtube = Youtube(config['YOUTUBE_API_KEY'])
     response = youtube.get_recent_videos(channel_id)
     for item in response['items']:
