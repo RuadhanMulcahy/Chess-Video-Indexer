@@ -31,7 +31,7 @@ def element_name_to_class_name(element_name):
         'wq' : 10,
         'wp' : 11,
         'highlight square' : 12,
-        'board flipped' : 13,
+        'board flipped' : 14,
         'board' : 14
     }
 
@@ -39,17 +39,15 @@ def element_name_to_class_name(element_name):
         if class_name in element_name:
             return class_names[class_name]
 
-def convert_co_ords_to_darknet(element, image_width, image_height, path, gameName):
-    size = element.size
-    w, h = size['width'], size['height']
-    className = element.get_attribute("class")
-    percentage_x_center = (element.location['x'] + (w/2))/ image_width
-    percentage_y_center = (element.location['y'] + (h/2))/ image_height
-    percentage_width = w/image_width
-    percentage_height = h/image_height
+def convert_co_ords_to_darknet(image_w, image_h, element_w, element_h, element_x, element_y, class_name, path, gameName):
+    percentage_x_center = (element_x + (element_w/2))/ image_w
+    percentage_y_center = (element_y + (element_h/2))/ image_h
+    percentage_width = element_w/image_w
+    percentage_height = element_h/image_h
 
-    if className != "element-pool" and className != "hover-square":
-        label = str(element_name_to_class_name(className)) + " " + str(percentage_x_center) + " " + str(percentage_y_center) + " " + str(percentage_width) + " " + str(percentage_height)
+    # if class_name == "board" or class_name == "board flipped":
+    if class_name != "element-pool" and class_name != "hover-square" and class_name != "board-images":
+        label = str(element_name_to_class_name(class_name)) + " " + str(percentage_x_center) + " " + str(percentage_y_center) + " " + str(percentage_width) + " " + str(percentage_height)
         write_label_to_file(path + '/' + gameName + '.txt', label+"\n")
     else:
         pass

@@ -1,6 +1,8 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
+import re
 
 from chessdotcom.xpaths import XPaths
 
@@ -29,15 +31,23 @@ def get_move_count(driver):
 
     return moveCount
 
-def change_board_size(driver, width_height):
-    board_style = driver.find_element(By.XPATH, XPaths.chess_board).get_attribute("style")
-    print(board_style.split())
-    board_style = board_style.split()
-    width_height_formatted = f"{str(width_height)}px;"
-    board_style[1] = width_height_formatted
-    board_style[3] = width_height_formatted
-    board_style = ' '.join(board_style)
-    driver.execute_script(f"arguments[0].setAttribute('style','{board_style}')", driver.find_element(By.XPATH, XPaths.chess_board))
+def get_game_ids(driver, profile_name):
+    game_ids_with_username = []
+    game_ids = []
 
+    base_url = f'https://www.chess.com/games/archive/{str(profile_name)}'
+    driver.get(base_url)
 
-    
+    index= 1
+    while(True):
+        try:
+            url = driver.find_element(By.XPATH, f'//*[@id="games-root-index"]/div[2]/table/tbody/tr[{index}]/td[1]/a').get_attribute('href')
+            split_url = url.split('/')
+            game_id_with_username = split_url[-1]
+            game_id = game_id_with_username.split('?')[0]
+            game_ids.append(game_id)
+            game_ids_with_username.append(game_id_with_username)
+        except NoSuchElementException as error:
+            break
+        index+=1
+    return game_ids, game_ids_with_username
