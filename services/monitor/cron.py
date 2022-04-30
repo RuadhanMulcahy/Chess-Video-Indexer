@@ -34,15 +34,3 @@ class Cron():
             self.sched.add_job(func, job_type, day=frequency)
         else:
             raise Exception(f'Cadence Type {cadence_type} is not valid.')
-
-    def stop_scheduler(self):
-        """
-        Cancel the job stored in this object.
-        """
-        self.sched.shutdown()
-
-    def start_scheduler(self):
-        """
-        Start the job loop for scheduled jobs.
-        """
-        self.sched.start()
