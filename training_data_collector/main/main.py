@@ -2,11 +2,12 @@ from selenium import webdriver
 import time
 
 from chessdotcom import actions
-from chessdotcom.labelgame import label_game
+from chessdotcom.label_game import label_game
 from darknetconvert import create_training_data_file_structure
 from chessdotcom.changeboardstyle import change_board_style
 from chessdotcom.actions import get_game_ids
 from flags import flags
+from chessdotcom.xpaths import xpaths
 
 driver_location = "/snap/bin/chromium.chromedriver"
 binary_location = "/usr/bin/chromium-browser"
@@ -42,8 +43,8 @@ while(option <= 30):
 
         driver.get(f"https://www.chess.com/game/live/{flags['game_id_with_username']}")
         time.sleep(2)
-        actions.close_end_game_pop_up(driver)
-        actions.go_to_game_start(driver)
+        actions.click_element(driver, xpaths['end_game_pop_up'])
+        actions.click_element(driver, xpaths['game_start'])
         label_game(driver, str(option))
         game_index += 1
     option+=1

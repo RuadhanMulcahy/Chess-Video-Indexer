@@ -3,7 +3,6 @@ import random
 import os
 
 def enrich_image(element, original_image_path):
-    print(original_image_path)
     image = cv2.imread(original_image_path)
     enriched_image = get_random_background()
 
@@ -36,7 +35,6 @@ def enrich_image(element, original_image_path):
 
     enriched_image_w = len(enriched_image[0])
     enriched_image_h = len(enriched_image)
-    # enriched_image = blur_image(enriched_image)
     cv2.imwrite(original_image_path, enriched_image)
 
     return (scale, enriched_image_w, enriched_image_h, x_offset, y_offset, x, y)

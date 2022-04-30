@@ -6,6 +6,7 @@ from chessdotcom import actions
 from darknetconvert import convert_co_ords_to_darknet
 from flags import flags
 from image_enrichment import enrich_image
+from chessdotcom.xpaths import xpaths
 
 def label_game(driver, option):
     gameName = flags['game_id_with_username']
@@ -13,7 +14,7 @@ def label_game(driver, option):
 
     for x in range(1, moveCount + 1):
         label_board(driver, x, gameName, option)
-        actions.next_move(driver)  
+        actions.click_element(driver, xpaths['next_move'])
     label_board(driver, x + 1, gameName, option)
 
 def label_board(driver, move_number, game_name, option):
