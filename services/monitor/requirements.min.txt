@@ -2,3 +2,5 @@ flask
 google-api-python-client
 python-dotenv
 requests
+apscheduler
+pylint

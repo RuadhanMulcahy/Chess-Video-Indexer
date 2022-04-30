@@ -16,11 +16,26 @@ class Youtube():
         """
         Get Channel Statistics by Channel ID.
         :param channel_id:
-        :return youtube_channel_stats:
-        :rtype str:
+        :return: youtube_channel_stats
+        :rtype: str
         """
         request = self.api.channels().list(
             part='statistics',
             id=channel_id
+        )
+        return request.execute()
+
+    def get_recent_videos(self, channel_id):
+        """
+        Get last 5 videos by Channel ID in order of upload date.
+        :param channel_id:
+        :return: youtube_channel_recent_videos
+        :rtype: str
+        """
+        request = self.api.search().list(
+            part="snippet",
+            channelId=channel_id,
+            maxResults=5,
+            order="date"
         )
         return request.execute()
