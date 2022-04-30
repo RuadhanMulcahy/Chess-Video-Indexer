@@ -1,0 +1,8 @@
+train: ../training_data/images/train
+val: ../training_data/images/val
+
+nc: 
+
+names: ['board flipped', 'piece br square', 'piece bn square', 'piece bb square',
+'piece bq square', 'piece bp square', piece wr square', 'piece wn square', 'piece wb square',
+'piece wq square', 'piece wp square']
