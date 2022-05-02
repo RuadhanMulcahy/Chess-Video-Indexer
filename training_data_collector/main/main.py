@@ -24,14 +24,15 @@ create_training_data_file_structure()
 game_ids, game_ids_with_username = get_game_ids(driver, '2016ratman2016')
 
 flags['highlight'] = False
-option = 1
 
 game_index = 0
 
-while(option <= 30):
+board_styles_to_use = [1, 2, 3, 4, 6, 7, 8, 11, 12, 22, 23, 28, 30]
+
+for style in board_styles_to_use:
     flags['train_or_val'] = "train"
 
-    change_board_style(driver, option)
+    change_board_style(driver, style)
     
     for index in range(10):   
         flags['game_id'] = game_ids[game_index]
@@ -45,6 +46,5 @@ while(option <= 30):
         time.sleep(2)
         actions.click_element(driver, xpaths['end_game_pop_up'])
         actions.click_element(driver, xpaths['game_start'])
-        label_game(driver, str(option))
+        label_game(driver, str(style))
         game_index += 1
-    option+=1

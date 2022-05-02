@@ -36,8 +36,8 @@ def element_name_to_class_name(element_name):
         'wq' : 10,
         'wp' : 11,
         'highlight square' : 12,
-        'board flipped' : 14,
-        'board' : 14
+        'board flipped' : 13,
+        'board' : 13
     }
 
     for class_name in class_names:
