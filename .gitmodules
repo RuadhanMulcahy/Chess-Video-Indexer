@@ -1,0 +1,3 @@
+[submodule "services/video_chess_indexer/main/yolov5"]
+	path = services/video_chess_indexer/main/yolov5
+	url = https://github.com/ultralytics/yolov5

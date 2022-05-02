@@ -2,3 +2,5 @@ __pycache__
 .pytest_cache
 user_data/
 *.png
+venv
+result*
