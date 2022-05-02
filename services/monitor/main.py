@@ -2,6 +2,7 @@
 Entrypoint Module for CVI Monitor Service.
 """
 from flask import Flask
+from cron import CadenceType, Cron
 
 from api.api_version import api_version
 
@@ -15,5 +16,14 @@ def default_route():
     """
     return 'Default Route, Please Specify API Version.'
 
+def test_job():
+    """
+    Temporary test function.
+    """
+    print('Test Job for APScheduler.')
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    cron = Cron()
+    cron.schedule_job(test_job, cadence_type=CadenceType.HOURS)
+    cron.start_scheduler()
+    app.run(host='0.0.0.0', debug=False)
