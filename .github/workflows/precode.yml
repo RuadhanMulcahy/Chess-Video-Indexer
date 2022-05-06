@@ -20,3 +20,8 @@ jobs:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
           docker build -t $DOCKER_HUB_USERNAME/cvi-monitor:latest services/monitor
+      - name: Docker Build Data Service
+        env:
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+        run: |
+          docker build -t $DOCKER_HUB_USERNAME/cvi-data:latest services/data
