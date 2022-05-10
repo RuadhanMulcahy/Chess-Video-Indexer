@@ -35,3 +35,13 @@ jobs:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
           docker push $DOCKER_HUB_USERNAME/cvi-data:latest
+      - name: Docker Build MySQL Service
+        env:
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+        run: |
+          docker build -t $DOCKER_HUB_USERNAME/cvi-mysql:latest services/mysql
+      - name: Docker Push MySQL Service
+        env:
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+        run: |
+          docker push $DOCKER_HUB_USERNAME/cvi-mysql:latest

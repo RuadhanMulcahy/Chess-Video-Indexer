@@ -25,5 +25,5 @@ def test_job():
 if __name__ == '__main__':
     cron = Cron()
     cron.schedule_job(test_job, cadence_type=CadenceType.HOURS)
-    cron.start_scheduler()
-    app.run(host='0.0.0.0', debug=False)
+    cron.sched.start()
+    app.run(host='0.0.0.0', port=3000, debug=False)
