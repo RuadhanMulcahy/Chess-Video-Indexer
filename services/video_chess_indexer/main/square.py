@@ -2,11 +2,15 @@ from piece_id_lookups import id_to_short
 from piece_id_lookups import id_to_verbose
 
 class Square:
-    highlighted = False
-    piece_short = ''
-    piece_verbose = ''
+    def __init__(self):
+        self.highlighted = False
+        self.piece_short = ''
+        self.piece_verbose = ''
 
     def set(self, piece_id):
+        """
+        Takes in label id and sets appopriate values
+        """
         if piece_id == '12':
             self.highlighted = True
         else:
