@@ -11,7 +11,7 @@ class Convert:
 
     def set_top_square_corner_x_y(self):
         """
-        Sets the top left center square co ordinates
+        Sets the top left center square co-ordinates
         """
         self.top_corner_square_x_center = (self.board_x_center - (self.board_w / 2)) + self.square_w / 2
         self.top_corner_square_y_center = (self.board_y_center - (self.board_h / 2)) + self.square_h / 2
@@ -34,7 +34,7 @@ class Convert:
 
     def is_label_within_board(self, x_center, y_center):
         """
-        Chcks if label is within the board boundaries
+        Checks if label is within the board boundaries
         """
         if x_center < self.board_left or x_center > self.board_right:
             return False
@@ -45,7 +45,7 @@ class Convert:
 
     def convert_darknet_to_chess_pos(self, x_center, y_center):
         """
-        Converts darknet x y coordinates to chess position
+        Converts darknet (x, y) coordinates to chess position
         """
         x_pos = round((x_center - self.top_corner_square_x_center) / self.square_w)
         y_pos = round((y_center - self.top_corner_square_y_center) / self.square_h)
