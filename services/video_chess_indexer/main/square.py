@@ -9,7 +9,7 @@ class Square:
 
     def set(self, piece_id):
         """
-        Takes in label id and sets appopriate values
+        Takes in label id and sets appropriate values
         """
         if piece_id == '12':
             self.highlighted = True
