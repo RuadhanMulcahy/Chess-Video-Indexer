@@ -3,7 +3,7 @@ import shutil
 
 def remove_old_label_file():
     """
-    Removes and existing detection results
+    Removes any existing detection results
     """
     shutil.rmtree('./files/results/result', ignore_errors=True)
     
