@@ -30,7 +30,7 @@ class Board:
 
     def show_highlighted(self):
         """
-        Shows chessboard highlight squares (For debugging purposes
+        Shows chessboard highlight squares (For debugging purposes)
         """
         print("_________________________")
         for row in self.squares:
