@@ -25,16 +25,16 @@ jobs:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
           docker push $DOCKER_HUB_USERNAME/cvi-monitor:latest
-      - name: Docker Build Data Service
-        env:
-          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-        run: |
-          docker build -t $DOCKER_HUB_USERNAME/cvi-data:latest services/data
-      - name: Docker Push Data Service
-        env:
-          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-        run: |
-          docker push $DOCKER_HUB_USERNAME/cvi-data:latest
+      # - name: Docker Build Data Service
+      #   env:
+      #     DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      #   run: |
+      #     docker build -t $DOCKER_HUB_USERNAME/cvi-data:latest services/data
+      # - name: Docker Push Data Service
+      #   env:
+      #     DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      #   run: |
+      #     docker push $DOCKER_HUB_USERNAME/cvi-data:latest
       - name: Docker Build MySQL Service
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
