@@ -1,3 +1,4 @@
+from cv2 import threshold
 from board import Board
     
 class Convert:
@@ -49,7 +50,7 @@ class Convert:
     def get_board(self):
         """
         Gets the board label in the labels list and removes it from the labels list
-        If 0 or 2 or more boards are detected False is returned
+        If 1 board is detected it returns True otherwise it returns False
         """
         board_count = 0
         board_label_index = 0
@@ -73,8 +74,15 @@ class Convert:
             return False
 
     def is_square_shape(self, darknet_w, darknet_h):
+        """
+        Checks if detected object is in shape square
+        Compares width and height and checks if there is more than threshold percentage difference.
+        If difference past threshold it returns False otherwise it returns True.
+        """
         aspect_ratio_w = 16
         aspect_ratio_h = 9
+
+        threshold = 0.02
 
         w = aspect_ratio_w * darknet_w
         h = aspect_ratio_h * darknet_h
@@ -84,7 +92,7 @@ class Convert:
             dif = (w - h) / w
         else:
             dif = (h - w) / h
-        if dif > 0.02:
+        if dif > threshold:
             return False
         return True
                 
@@ -97,7 +105,7 @@ class Convert:
             self.set_square_w_h()
             self.set_top_square_corner_x_y()
             self.board = Board()
-
+            
             for label in self.labels:
                 if self.is_label_within_board(label.x_center, label.y_center):
                     x_pos, y_pos = self.convert_darknet_to_chess_pos(label.x_center, label.y_center)                     
