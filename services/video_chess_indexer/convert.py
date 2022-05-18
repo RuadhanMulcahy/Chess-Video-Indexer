@@ -3,11 +3,6 @@ from board import Board
 class Convert:
     def __init__(self, labels):
         self.labels = labels
-        self.get_board()
-        self.set_board_boundaries()
-        self.set_square_w_h()
-        self.set_top_square_corner_x_y()
-        self.board = Board()
 
     def set_top_square_corner_x_y(self):
         """
@@ -54,23 +49,60 @@ class Convert:
     def get_board(self):
         """
         Gets the board label in the labels list and removes it from the labels list
+        If 0 or 2 or more boards are detected False is returned
         """
+        board_count = 0
+        board_label_index = 0
+
         for index, label in enumerate(self.labels):
-            if label[0] == '13':
-                self.board_x_center = float(label[1])
-                self.board_y_center = float(label[2])
-                self.board_w = float(label[3])
-                self.board_h = float(label[4])
-                del self.labels[index]
+            if label.id == '13':
+                board_count += 1
+                if self.is_square_shape(label.w, label.h):
+                    self.board_x_center = label.x_center
+                    self.board_y_center = label.y_center
+                    self.board_w = label.w
+                    self.board_h = label.h
+                    board_label_index = index
+                else:
+                    return False
+
+        if board_count == 1:
+            del self.labels[board_label_index]
+            return True
+        else:
+            return False
+
+    def is_square_shape(self, darknet_w, darknet_h):
+        aspect_ratio_w = 16
+        aspect_ratio_h = 9
+
+        w = aspect_ratio_w * darknet_w
+        h = aspect_ratio_h * darknet_h
+
+        dif = 0.0
+        if w > h:
+            dif = (w - h) / w
+        else:
+            dif = (h - w) / h
+        if dif > 0.02:
+            return False
+        return True
                 
     def go(self):
         """
-        Loops through each element in the labels file 
+        Orchestrates conversion of labels to chess pos array
         """
-        for label in self.labels:
-            if self.is_label_within_board(float(label[1]), float(label[2])):
-                x_pos, y_pos = self.convert_darknet_to_chess_pos(float(label[1]), float(label[2]))
-                self.board.squares[y_pos][x_pos].set(label[0])
+        if self.get_board():
+            self.set_board_boundaries()
+            self.set_square_w_h()
+            self.set_top_square_corner_x_y()
+            self.board = Board()
+
+            for label in self.labels:
+                if self.is_label_within_board(label.x_center, label.y_center):
+                    x_pos, y_pos = self.convert_darknet_to_chess_pos(label.x_center, label.y_center)                     
+                    self.board.squares[y_pos][x_pos].set(label.id, label.conf)
+            return self.board
 
     def temp_debug(self):
         """
@@ -79,4 +111,15 @@ class Convert:
         print(f"board_top - {self.board_top}")
         print(f"board_bottom - {self.board_bottom}")
         print(f"board_left - {self.board_left}")
-        print(f"baord_right - {self.board_right}")
+        print(f"board_right - {self.board_right}")
+
+# from file_handler import read_label_file
+# from game import Game
+
+# convert1 = Convert(read_label_file('./files/results/result/labels/0_1158.txt'))
+# convert2 = Convert(read_label_file('./files/results/result/labels/0_1859.txt'))
+# game = Game()
+# game.read_position(convert1.go())
+# game.board.show()
+# game.read_position(convert2.go())
+# game.board.show()

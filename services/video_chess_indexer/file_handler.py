@@ -1,5 +1,6 @@
-import os
 import shutil
+
+from label import Label
 
 def remove_old_label_file():
     """
@@ -15,5 +16,5 @@ def read_label_file(path):
     with open(path) as file:
         for line in file:
             split_line = line.rstrip().split(" ")
-            labels.append(split_line)
+            labels.append(Label(split_line[0], split_line[1], split_line[2], split_line[3], split_line[4], split_line[5]))
     return labels
