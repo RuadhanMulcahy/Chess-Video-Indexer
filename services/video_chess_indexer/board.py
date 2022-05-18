@@ -23,16 +23,24 @@ class Board:
             self.squares.append(row)
 
     def create_game_start(self, flipped):
+        """
+        Populates board with starting position - for either unflipped or flipped
+        """
         starting_indexes = [0,1,6,7]
 
-        if flipped is True:
-            starting_indexes = [7,6,1,0]
+        if flipped:
+            starting_indexes = list(reversed(starting_indexes))
+            self._board_start[0] = list(reversed(self._board_start[0]))
+            self._board_start[3] = list(reversed(self._board_start[3]))
 
         for index, row in enumerate(starting_indexes):
             for square in range(8):
                 self.squares[row][square].set(self._board_start[index][square], 0)          
 
     def compare(self, board_to_compare):
+        """
+        Compares current board with another board
+        """
         for row in range(8):
             for square in range(8):
                 if self.squares[row][square].piece_short != board_to_compare.squares[row][square].piece_short:

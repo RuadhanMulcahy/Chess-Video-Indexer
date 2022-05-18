@@ -1,5 +1,4 @@
 from board import Board
-import time
 
 class Game:
     def __init__(self):
@@ -31,7 +30,6 @@ class Game:
 
     def check_for_game_start(self):
         if self.board.compare(self.board_normal) or self.board.compare(self.board_flipped):
-            print("here")
             return True
         return False
 
