@@ -167,3 +167,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Video Files ###
+*.mp4

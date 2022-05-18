@@ -1,6 +1,13 @@
 from square import Square
 
 class Board:
+    _board_start = [
+                    ['0','1','2','4','3','2','1','0'], 
+                    ['5','5','5','5','5','5','5','5'],
+                    ['11','11','11','11','11','11','11','11'],
+                    ['6','7','8','10','9','8','7','6']
+                ]
+
     def __init__(self):
         self.squares = []
         self.create()
@@ -14,6 +21,23 @@ class Board:
             for square in range(8):
                 row.append(Square())
             self.squares.append(row)
+
+    def create_game_start(self, flipped):
+        starting_indexes = [0,1,6,7]
+
+        if flipped is True:
+            starting_indexes = [7,6,1,0]
+
+        for index, row in enumerate(starting_indexes):
+            for square in range(8):
+                self.squares[row][square].set(self._board_start[index][square], 0)          
+
+    def compare(self, board_to_compare):
+        for row in range(8):
+            for square in range(8):
+                if self.squares[row][square].piece_short != board_to_compare.squares[row][square].piece_short:
+                    return False
+        return True
 
     def show(self):
         """
