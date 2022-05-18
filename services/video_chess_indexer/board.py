@@ -1,4 +1,3 @@
-from audioop import reverse
 from square import Square
 
 class Board:

@@ -1,4 +1,3 @@
-from cv2 import threshold
 from board import Board
     
 class Convert:

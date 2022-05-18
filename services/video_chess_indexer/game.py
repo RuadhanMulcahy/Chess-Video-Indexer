@@ -1,5 +1,4 @@
 from board import Board
-import time
 
 class Game:
     def __init__(self):
