@@ -10,5 +10,14 @@ services:
       - "5000:5000"
   mysql:
     build: services/mysql
+    environment:
+      MYSQL_DATABASE: myDb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test
+    volumes:
+      - persistent:/var/lib/mysql
     ports:
       - "3306:3306"
+volumes:
+  persistent:
