@@ -48,6 +48,10 @@ class Convert:
         return x_pos, y_pos
 
     def get_board(self):
+        """
+        Gets highest confidence board label in labels array and deletes any lower confidence board labels.
+        Sets board parameters
+        """
         best_conf = 0
         best_index = 0
         board_count = 0
@@ -75,14 +79,6 @@ class Convert:
         if valid_board_detected:
             return True
         return False        
-
-    def test(self, filename):
-        count = 0
-        for i in self.labels:
-            if i.id == '12':
-                count += 1
-        if(count > 2):
-            print(filename)
 
     def is_square_shape(self, darknet_w, darknet_h):
         """
@@ -130,19 +126,3 @@ class Convert:
         print(f"board_bottom - {self.board_bottom}")
         print(f"board_left - {self.board_left}")
         print(f"board_right - {self.board_right}")
-
-# from file_handler import read_label_file
-# # from game import Game
-
-# # def extract_integer(filename):
-# #     return int(filename.split('_')[1].split('.')[0])
-
-# # file_name = '0_1948.txt'
-# # seconds = extract_integer(file_name) / 30
-# # print(str(datetime.timedelta(seconds=seconds)))
-# # # convert = Convert(read_label_file('./files/results/result/labels/0_1724.txt'))
-# # convert = Convert(read_label_file('./files/results/result/labels/0_1948.txt'))
-# # convert.go()
-
-# convert = Convert(read_label_file('./files/results/result/labels/0_1724.txt'))
-# print(convert.is_square_shape(0.557031, 0.990278))

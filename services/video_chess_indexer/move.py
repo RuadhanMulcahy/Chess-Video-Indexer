@@ -1,6 +1,3 @@
-# from square import Square
-
-
 class Move:
     def __init__(self, flipped=None):
         self.prev_square = None
@@ -26,5 +23,3 @@ class Move:
             print(f"New Square: None")
 
         print(f"Flipped: {self.flipped}")
-
-move1 = Move(True)

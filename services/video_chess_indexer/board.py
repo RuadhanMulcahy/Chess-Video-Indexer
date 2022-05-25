@@ -36,7 +36,7 @@ class Board:
 
         for index, row in enumerate(starting_indexes):
             for square in range(8):
-                self.squares[row][square].set(self._board_start[index][square], 0)     
+                self.squares[row][square].set(self._board_start[index][square], 1)     
 
     def compare(self, board_to_compare, highlighted):
         """
@@ -54,13 +54,6 @@ class Board:
                         if self.squares[row][square].piece_short != board_to_compare.squares[row][square].piece_short:
                             return False
         return True
-
-    def compare_exact(self, board_to_compare):
-        if board_to_compare is None and self.board is not None:
-            return True
-        elif self.compare(board_to_compare, False) and self.compare(board_to_compare, True):
-            return True
-        return False 
 
     def show(self):
         """
@@ -92,16 +85,4 @@ class Board:
                 else:
                     print('[  ]', end='')
             print(end='\n')
-
         print(count)
-
-# board1 = Board()
-# board2 = Board()
-
-# board1.squares[0][1].piece_short = 'bn'
-# board1.squares[0][1].highlighted = True
-
-# board2.squares[0][1].piece_short = 'bn'
-# board2.squares[0][1].highlighted = True
-
-# print(board1.compare(board2, True))
