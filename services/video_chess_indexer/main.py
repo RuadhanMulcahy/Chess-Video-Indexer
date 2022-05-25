@@ -25,12 +25,14 @@ for file_name in file_names:
     convert = Convert(read_label_file(f"./files/results/result/labels/{file_name}"))
     board = convert.go()
     if board is not None:
+        # board.show_highlighted()
         # board.show()
         # time.sleep(1)
-        if game.read_position(board):
-            board.show()
-            seconds = extract_integer(file_name) / 30
-            print(str(datetime.timedelta(seconds=seconds)))
+        # print(file_name)
+        seconds = extract_integer(file_name) / 30
+        # print(str(datetime.timedelta(seconds=seconds)))
+        if game.read_position(board, datetime.timedelta(seconds=seconds)) is False:
+            break
 
 # # print("NOT IN SCOPE")
 # # print(i)

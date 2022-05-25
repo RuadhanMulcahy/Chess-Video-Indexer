@@ -1,3 +1,4 @@
+import datetime
 from board import Board
     
 class Convert:
@@ -47,30 +48,41 @@ class Convert:
         return x_pos, y_pos
 
     def get_board(self):
-        """
-        Gets the board label in the labels list and removes it from the labels list
-        If 1 board is detected it returns True otherwise it returns False
-        """
+        best_conf = 0
+        best_index = 0
         board_count = 0
-        board_label_index = 0
+        board_indexes = []
+        valid_board_detected = False
 
         for index, label in enumerate(self.labels):
             if label.id == '13':
                 board_count += 1
-                if self.is_square_shape(label.w, label.h):
-                    self.board_x_center = label.x_center
-                    self.board_y_center = label.y_center
-                    self.board_w = label.w
-                    self.board_h = label.h
-                    board_label_index = index
-                else:
-                    return False
+                if label.conf > best_conf and self.is_square_shape(label.w, label.h) and label.conf > 0.9:
+                    best_conf = label.conf
+                    best_index = index
+                    valid_board_detected = True
+                board_indexes.append(index)
 
-        if board_count == 1:
-            del self.labels[board_label_index]
+        if board_count >= 1:
+            self.board_x_center = self.labels[best_index].x_center
+            self.board_y_center = self.labels[best_index].y_center
+            self.board_w = self.labels[best_index].w
+            self.board_h = self.labels[best_index].h
+        
+        for index in sorted(board_indexes, reverse=True):
+            del self.labels[index]
+
+        if valid_board_detected:
             return True
-        else:
-            return False
+        return False        
+
+    def test(self, filename):
+        count = 0
+        for i in self.labels:
+            if i.id == '12':
+                count += 1
+        if(count > 2):
+            print(filename)
 
     def is_square_shape(self, darknet_w, darknet_h):
         """
@@ -85,7 +97,6 @@ class Convert:
 
         w = aspect_ratio_w * darknet_w
         h = aspect_ratio_h * darknet_h
-
         dif = 0.0
         if w > h:
             dif = (w - h) / w
@@ -107,7 +118,7 @@ class Convert:
             
             for label in self.labels:
                 if self.is_label_within_board(label.x_center, label.y_center):
-                    x_pos, y_pos = self.convert_darknet_to_chess_pos(label.x_center, label.y_center)                     
+                    x_pos, y_pos = self.convert_darknet_to_chess_pos(label.x_center, label.y_center)             
                     self.board.squares[y_pos][x_pos].set(label.id, label.conf)
             return self.board
 
@@ -121,12 +132,17 @@ class Convert:
         print(f"board_right - {self.board_right}")
 
 # from file_handler import read_label_file
-# from game import Game
+# # from game import Game
 
-# convert1 = Convert(read_label_file('./files/results/result/labels/0_1158.txt'))
-# convert2 = Convert(read_label_file('./files/results/result/labels/0_1859.txt'))
-# game = Game()
-# game.read_position(convert1.go())
-# game.board.show()
-# game.read_position(convert2.go())
-# game.board.show()
+# # def extract_integer(filename):
+# #     return int(filename.split('_')[1].split('.')[0])
+
+# # file_name = '0_1948.txt'
+# # seconds = extract_integer(file_name) / 30
+# # print(str(datetime.timedelta(seconds=seconds)))
+# # # convert = Convert(read_label_file('./files/results/result/labels/0_1724.txt'))
+# # convert = Convert(read_label_file('./files/results/result/labels/0_1948.txt'))
+# # convert.go()
+
+# convert = Convert(read_label_file('./files/results/result/labels/0_1724.txt'))
+# print(convert.is_square_shape(0.557031, 0.990278))
