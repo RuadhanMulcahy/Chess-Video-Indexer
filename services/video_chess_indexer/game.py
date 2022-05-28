@@ -17,12 +17,13 @@ class Game:
         if self.prev_valid_time_stamp is None:
             self.prev_valid_time_stamp = time_stamp
 
-        if self.move_count < 200:
+        if self.move_count < 300:
             if self.valid_highlight_squares(board): 
                 if board.compare(self.last_valid_board, True) == False and self.same_count >= 10:    
                     self.last_valid_board.show_highlighted()
                     move = self.get_move(self.last_valid_board, self.prev_valid_time_stamp)
                     move.show()
+                    self.moves.append(move)
                     self.move_count+=1
                     self.same_count = 0
                     self.prev_valid_time_stamp = time_stamp
@@ -32,15 +33,17 @@ class Game:
         return False
 
     def get_move(self, board, time_stamp):
-        move = Move(self.flipped)
+        move = Move()
         move.time_stamp = time_stamp
         for row in board.squares:
             for square in row:
                 if square.highlighted and square.piece_short != '':
                     move.new_square = square
+                    move.new_square.set_pgn(self.flipped)
                     move.color = square.color
                 elif square.highlighted and square.piece_short == '':
                     move.prev_square = square
+                    move.prev_square.set_pgn(self.flipped)
         return move
 
     def valid_highlight_squares(self, board):

@@ -1,25 +1,23 @@
 class Move:
-    def __init__(self, flipped=None):
+    def __init__(self):
         self.prev_square = None
         self.new_square = None
         self.color = None
         self.time_stamp = None
-        self.flipped = flipped
 
     def compare(self, move):
-        print(self.flipped)
         if self.prev_square.compare(move.prev_square) and self.new_square.compare(move.new_square):
             return True
         return False
 
     def show(self):
         if self.prev_square is not None:
-            print(f"Prev Square: y: {self.prev_square.y} x: {self.prev_square.x}")
+            print(f"{self.prev_square.pgn_x} {self.prev_square.pgn_y}")
         else:
             print(f"Prev Square: None")
         if self.new_square is not None:
-            print(f"New Square: y: {self.new_square.y} x: {self.new_square.x} time_stamp: {self.time_stamp}")
+            print(f"{self.new_square.pgn_x} {self.new_square.pgn_y}")
         else:
             print(f"New Square: None")
 
-        print(f"Flipped: {self.flipped}")
+        print(self.time_stamp)
