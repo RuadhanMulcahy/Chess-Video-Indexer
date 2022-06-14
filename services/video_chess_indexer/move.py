@@ -2,6 +2,7 @@ class Move:
     def __init__(self):
         self.prev_square = None
         self.new_square = None
+        self.board = None
         self.color = None
         self.time_stamp = None
 

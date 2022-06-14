@@ -34,5 +34,7 @@ for file_name in file_names:
         if game.read_position(board, datetime.timedelta(seconds=seconds)) is False:
             break
 
+game.reverse_move_check()
+
 # # print("NOT IN SCOPE")
 # # print(i)
