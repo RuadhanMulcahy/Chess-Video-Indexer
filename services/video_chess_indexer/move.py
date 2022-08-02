@@ -22,15 +22,14 @@ class Move:
         return False
 
     def show(self):
-        print(self.new_square.piece_verbose)
+        # print(self.new_square.piece_short)
         # print(self.taken_piece)
+        print(f" {self.time_stamp} ", end='')
         if self.prev_square is not None:
-            print(f"{self.prev_square.pgn_x} {self.prev_square.pgn_y}")
+            print(f" {self.prev_square.pgn_x}{self.prev_square.pgn_y}", end='')
         else:
             print(f"Prev Square: None")
         if self.new_square is not None:
-            print(f"{self.new_square.pgn_x} {self.new_square.pgn_y}")
+            print(f" {self.new_square.pgn_x}{self.new_square.pgn_y}", end='')
         else:
-            print(f"New Square: None")
-
-        print(self.time_stamp)
+            print(f"New Square: None", end='')
