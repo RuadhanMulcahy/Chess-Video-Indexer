@@ -102,7 +102,7 @@ class Convert:
             return False
         return True
                 
-    def go(self):
+    def to_board(self):
         """
         Orchestrates conversion of labels to chess pos array
         """

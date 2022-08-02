@@ -38,10 +38,15 @@ class Board:
             for square in range(8):
                 self.squares[row][square].set(self._board_start[index][square], 1)     
 
-    def compare(self, board_to_compare, highlighted):
+    def is_match(self, board_to_compare, highlighted):
         """
-        Compares current board with another board
+        Checks if current board is the same as board_to_compare
+        Returns true if board is match and False if not
         """
+        if board_to_compare is None and len(self.squares) > 0:
+            print(len(self.squares))
+            return False
+
         for row in range(8):
             for square in range(8):
                 if highlighted == False: 

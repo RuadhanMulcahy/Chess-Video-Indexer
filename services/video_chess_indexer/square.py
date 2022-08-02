@@ -30,7 +30,6 @@ class Square:
             self.pgn_y = (8 - self.y)
             self.pgn_x = x_axis[self.x]
         
-
     def set(self, piece_id, current_confidence):
         """
         Takes in label id and sets appropriate values
