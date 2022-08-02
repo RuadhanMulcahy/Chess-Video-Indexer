@@ -1,9 +1,10 @@
 from game_start import GameStart
 
 class Game:
-    def __init__(self, game_start=None):
-        self.moves = []
+    def __init__(self, moves = [], game_start=None):
+        self.moves = moves
         self.reverse_moves = []
+        self.game_start = game_start
 
     """
     Method for adding move to game
@@ -18,14 +19,14 @@ class Game:
                 self.moves.append(move)
                 self.reverse_moves.pop()   
             elif self._is_catch_up_move(move) == False and len(self.reverse_moves) >= 1:
-                self.show()
+                # self.show()
                 return False
             else:
                 self.moves.append(move)
 
-        if len(self.moves) == 20:
-            # self.show()
-            return False
+        # if len(self.moves) == 20:
+        #     # self.show()
+        #     return False
 
     """
     Method for checking if move is a reverse move
@@ -81,8 +82,9 @@ class Game:
         #     move.show()
         moves = self.get_game()
 
-        for index in range(0, 10):
-            moves[index].show()
+        for move in moves:
+            move.show()
+        print("")
 
 
         

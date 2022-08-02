@@ -30,8 +30,9 @@ for file_name in file_names:
         # print(file_name)
         seconds = extract_integer(file_name) / 30
         # print(str(datetime.timedelta(seconds=seconds)))
-        if game_handler.read_board(board, datetime.timedelta(seconds=seconds)) == False:
-            break
+        game_handler.read_board(board, datetime.timedelta(seconds=seconds))
+
+game_handler.show_games()
 
 
 # # print("NOT IN SCOPE")
